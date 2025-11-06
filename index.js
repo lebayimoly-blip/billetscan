@@ -2,6 +2,13 @@ const express = require('express');
 const path = require('path');
 const app = express();
 
+// 🔐 Sécurité des en-têtes HTTP
+app.disable('x-powered-by');
+app.use((req, res, next) => {
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  next();
+});
+
 // 🔧 Middleware JSON
 app.use(express.json());
 
@@ -11,6 +18,11 @@ app.use('/auth', authRoutes);
 
 // 🖼️ Fichiers statiques React
 app.use(express.static(path.join(__dirname, 'frontend/build')));
+
+// 🛠️ Service Worker (évite MIME error)
+app.get('/service-worker.js', (req, res) => {
+  res.sendFile(path.resolve(__dirname, 'frontend/build/service-worker.js'));
+});
 
 // 🌐 Fallback SPA
 app.get('*', (req, res) => {
