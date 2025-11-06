@@ -1,20 +1,17 @@
-const express = require("express");
-const path = require("path");
-
+const express = require('express');
+const path = require('path');
 const app = express();
 
-// 🔐 API routes ici (si tu en as)
-app.use("/api", require("./routes/api")); // exemple
+// Middleware pour servir les fichiers statiques du frontend
+app.use(express.static(path.join(__dirname, '../frontend/build')));
 
-// 🧱 Servir le frontend buildé
-app.use(express.static(path.join(__dirname, "../frontend/build")));
-
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../frontend/build/index.html"));
+// Route fallback pour React (SPA)
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/build/index.html'));
 });
 
-// 🚀 Lancer le serveur sur le port Render
-const PORT = process.env.PORT || 3001;
+// Port dynamique pour Render
+const PORT = process.env.PORT || 10000;
 app.listen(PORT, () => {
-  console.log(`Serveur lancé sur le port ${PORT}`);
+  console.log(`Serveur démarré sur le port ${PORT}`);
 });
