@@ -31,7 +31,6 @@ Thumbs.db
 *.swp
 
 # 📦 Package locks (si tu veux éviter les conflits)
-package-lock.json
 yarn.lock
 
 # 📸 QR images de test
