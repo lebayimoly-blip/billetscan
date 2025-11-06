@@ -2,16 +2,23 @@ const express = require('express');
 const path = require('path');
 const app = express();
 
-// Middleware pour servir les fichiers statiques du frontend
+// 🔧 Middleware JSON
+app.use(express.json());
+
+// 🔗 Routes d'authentification
+const authRoutes = require('./auth.routes');
+app.use('/auth', authRoutes);
+
+// 🖼️ Fichiers statiques React
 app.use(express.static(path.join(__dirname, 'frontend/build')));
 
-// Route fallback pour React (SPA)
+// 🌐 Fallback SPA
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'frontend/build/index.html'));
 });
 
-// Port dynamique pour Render
+// 🚀 Port dynamique
 const PORT = process.env.PORT || 10000;
 app.listen(PORT, () => {
-  console.log(`Serveur démarré sur le port ${PORT}`);
+  console.log(`✅ Serveur démarré sur le port ${PORT}`);
 });
