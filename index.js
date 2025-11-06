@@ -19,6 +19,9 @@ app.use('/auth', authRoutes);
 const statsRoutes = require('./stats.routes');
 app.use('/stats', statsRoutes);
 
+const utilisateursRoutes = require('./utilisateurs.routes');
+app.use('/utilisateurs', utilisateursRoutes);
+
 /* 🖼️ Fichiers statiques React */
 app.use(express.static(path.join(__dirname, 'frontend/build')));
 
