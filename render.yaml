@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: scanbillet-app
+    env: node
+    rootDir: .
+    buildCommand: |
+      cd frontend
+      npm install
+      npm run build
+      cd ../backend
+      npm install
+    startCommand: node index.js
+    autoDeploy: true
+    envVars:
+      - key: NODE_VERSION
+        value: 18.20.8
+      - key: PORT
+        value: 10000 # Render assignera dynamiquement, mais utile en local
