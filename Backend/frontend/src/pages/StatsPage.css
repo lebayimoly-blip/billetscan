@@ -1,0 +1,87 @@
+/* 📦 Conteneur principal */
+.stats-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #fdfdfd;
+  border-radius: 8px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.08);
+}
+
+/* 🧭 Titre principal */
+.stats-container h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 24px;
+  color: #333;
+}
+
+/* 📅 Filtres de date */
+.date-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.date-filters label {
+  display: flex;
+  flex-direction: column;
+  font-weight: 500;
+  color: #444;
+}
+
+.date-filters input[type="date"] {
+  padding: 8px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-top: 5px;
+}
+
+.date-filters button {
+  padding: 10px 20px;
+  font-size: 15px;
+  background-color: #0077cc;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.date-filters button:hover {
+  background-color: #005fa3;
+}
+
+/* 📊 Résultats statistiques */
+.stats-results {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.stats-results p {
+  font-size: 18px;
+  margin: 10px 0;
+  font-weight: 500;
+}
+
+/* ❌ Message d’erreur */
+.error {
+  color: red;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* 📈 Section graphique */
+.chart-section {
+  margin: 40px auto;
+  max-width: 800px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}

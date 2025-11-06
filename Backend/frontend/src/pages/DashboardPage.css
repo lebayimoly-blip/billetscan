@@ -1,0 +1,83 @@
+/* src/pages/DashboardPage.css */
+
+/* 🧱 Conteneur principal */
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 2rem;
+  text-align: center;
+  padding-bottom: 4rem;
+}
+
+/* 📊 Cartes statistiques */
+.stats-cards {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin: 2rem 0;
+}
+
+.card {
+  padding: 1rem;
+  border-radius: 8px;
+  width: 150px;
+  color: white;
+}
+
+.orange { background-color: orange; }
+.green { background-color: green; }
+.red { background-color: crimson; }
+
+/* 🎯 Boutons d'action : 3 par ligne, taille réduite */
+.dashboard-actions {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.dashboard-actions button {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: bold;
+  background-color: #f1c40f;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+/* 🖱️ Alignement des icônes */
+button svg {
+  vertical-align: middle;
+}
+
+/* 🔓 Bouton de déconnexion */
+.logout-wrapper {
+  margin-top: auto;
+  display: flex;
+  justify-content: center;
+  padding: 2rem 0;
+}
+
+.logout-button {
+  background-color: #e74c3c;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.dashboard-form {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+}

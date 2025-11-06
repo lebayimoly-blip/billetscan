@@ -1,0 +1,8 @@
+.logo-fixed {
+  position: fixed;
+  top: 30px;
+  left: 30px;
+  width: 160px;
+  border-radius: 23px;
+  z-index: 1000;
+}

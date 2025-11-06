@@ -1,0 +1,45 @@
+.audit-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #fdfdfd;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+.audit-container h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.audit-list {
+  list-style: none;
+  padding-left: 0;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background-color: #fafafa;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.audit-list li {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  flex-direction: column;
+}
+
+.audit-list li:last-child {
+  border-bottom: none;
+}
+
+.timestamp {
+  font-size: 0.85rem;
+  color: #888;
+}
+
+.message {
+  font-size: 1rem;
+  color: #333;
+}

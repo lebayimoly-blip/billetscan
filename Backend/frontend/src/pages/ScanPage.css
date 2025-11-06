@@ -1,0 +1,116 @@
+/* 📦 Conteneur principal */
+.scan-page {
+  max-width: 700px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #fdfdfd;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  text-align: center;
+  transition: background-color 0.3s ease-in-out;
+}
+
+/* 🧭 Titre */
+.scan-page h2 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* 🖊️ Formulaire de scan */
+.scan-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.scan-form input {
+  padding: 10px;
+  font-size: 1rem;
+  width: 100%;
+  max-width: 400px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  transition: border-color 0.2s ease;
+}
+
+.scan-form input:focus {
+  outline: none;
+  border-color: #0077cc;
+  box-shadow: 0 0 0 2px rgba(0, 119, 204, 0.2);
+}
+
+.scan-form button {
+  padding: 10px 16px;
+  font-size: 1rem;
+  background-color: #0077cc;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.scan-form button:hover {
+  background-color: #005fa3;
+}
+
+/* ✅ Résultat */
+.scan-result {
+  margin-top: 20px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  padding: 10px;
+  border-radius: 6px;
+  min-height: 48px;
+}
+
+.scan-result.valide {
+  color: #28a745;
+  background-color: #eaf8ec;
+  border: 1px solid #28a745;
+}
+
+.scan-result.invalide {
+  color: #e74c3c;
+  background-color: #fdecea;
+  border: 1px solid #e74c3c;
+}
+
+/* 🔙 Bouton retour */
+.scan-actions {
+  margin-top: 30px;
+}
+
+.scan-actions button {
+  padding: 10px 16px;
+  font-size: 1rem;
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.scan-actions button:hover {
+  background-color: #5a6268;
+}
+
+/* 💡 Animation visuelle */
+.scan-page.flash-valid {
+  animation: flashGreen 0.4s ease-in-out;
+}
+
+.scan-page.flash-invalid {
+  animation: flashRed 0.4s ease-in-out;
+}
+
+@keyframes flashGreen {
+  0% { background-color: #eaf8ec; }
+  100% { background-color: #fdfdfd; }
+}
+
+@keyframes flashRed {
+  0% { background-color: #fdecea; }
+  100% { background-color: #fdfdfd; }
+}
