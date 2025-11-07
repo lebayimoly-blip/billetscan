@@ -3,7 +3,7 @@ import { API_BASE_URL } from '../config';
 import './AjouterBilletPage.css';
 import AppIcon from '../components/AppIcon';
 import Header from '../components/Header';
-import ZXingScanner from '../components/ZXingScanner'; // ✅ Import ajouté
+import ZXingScanner from '../components/ZXingScanner';
 import { getBilletsLocaux, seedBilletsLocaux } from '../utils/scanBillet';
 
 function AjouterBilletPage() {
@@ -48,9 +48,14 @@ function AjouterBilletPage() {
 
   // 📷 Scan QR → ajout direct via API
   const handleScan = async (code) => {
-    if (!code) return;
+    if (!code) {
+      setScanFeedback('⚠️ Aucun QR détecté ou code vide');
+      setTimeout(() => setScanFeedback(null), 4000);
+      return;
+    }
 
     setScanMode(false);
+    console.log('📦 Code scanné :', code);
 
     try {
       const res = await fetch(`${API_BASE_URL}/billet/valider-scan`, {
@@ -101,7 +106,10 @@ function AjouterBilletPage() {
         <button onClick={() => setScanMode(true)}>📷 Scanner un QR code</button>
         {scanMode && (
           <div className="qr-scanner">
-            <ZXingScanner onScan={handleScan} onError={(err) => setScanFeedback(`❌ Erreur de scan : ${err.message}`)} />
+            <ZXingScanner
+              onScan={handleScan}
+              onError={(err) => setScanFeedback(`❌ Erreur de scan : ${err.message}`)}
+            />
           </div>
         )}
         {scanFeedback && <p className="scan-feedback">{scanFeedback}</p>}

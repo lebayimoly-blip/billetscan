@@ -15,12 +15,21 @@ function ZXingScanner({ onScan, onError }) {
           null,
           videoRef.current,
           (result, error) => {
-            if (result) onScan(result.getText());
-            if (error && error.name !== "NotFoundException") onError?.(error);
+            if (result?.getText()) {
+              const scannedText = result.getText();
+              console.log("✅ QR détecté :", scannedText);
+              onScan(scannedText);
+            } else if (error && error.name !== "NotFoundException") {
+              console.error("❌ Erreur de scan :", error);
+              onError?.(error);
+            } else {
+              console.warn("⚠️ Aucun QR détecté");
+            }
           }
         );
         controlsRef.current = controls; // ✅ stocker pour l'arrêt
       } catch (err) {
+        console.error("❌ Erreur initialisation scanner :", err);
         onError?.(err);
       }
     };
