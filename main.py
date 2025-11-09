@@ -3,9 +3,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import logging
-import os
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
 
 # 🛠️ Configuration des logs pour le debug backend
 logging.basicConfig(level=logging.DEBUG)
@@ -23,21 +20,11 @@ app.add_middleware(
         "http://localhost:3000",
         "http://127.0.0.1:3000",
         "http://192.168.1.10:3000",  # ← IP locale pour tests réseau
-        "https://billetscan.onrender.com",  # ← Ajout pour Render
     ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-# 🧩 Configuration de la base PostgreSQL via SQLAlchemy
-DATABASE_URL = os.getenv("DATABASE_URL")
-engine = create_engine(DATABASE_URL)
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-
-# 🧱 Création automatique des tables dans PostgreSQL
-from app.models import Base  # ton declarative_base
-Base.metadata.create_all(bind=engine)
 
 # 📦 Importation explicite des routeurs
 from app.api.v1.scan import router as scan_router

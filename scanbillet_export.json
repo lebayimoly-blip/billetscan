@@ -1,0 +1,32 @@
+{
+  "roles": [
+    {
+      "id": 1,
+      "name": "super_admin"
+    },
+    {
+      "id": 2,
+      "name": "agent"
+    },
+    {
+      "id": 3,
+      "name": "admin"
+    }
+  ],
+  "agents": [
+    {
+      "id": 1,
+      "username": "admin",
+      "hashed_password": "$2b$12$pBDXWuj43n.VF7Bj9K7zne0x9XXkd0HA4nXp0n4awx6kVR1fwmwu6",
+      "role_id": 1
+    },
+    {
+      "id": 2,
+      "username": "lebayi moly",
+      "hashed_password": "$2b$12$tgaOWUu8iPx3DpUzYW.HX.d/Dts2eGgJ.jfi2pX6FvDbwOWxOWB8e",
+      "role_id": 1
+    }
+  ],
+  "scans": [],
+  "billets": []
+}

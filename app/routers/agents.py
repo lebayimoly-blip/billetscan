@@ -1,6 +1,6 @@
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-from pydantic import BaseModel, constr
+from pydantic import BaseModel
 from app.db.session import get_db
 from app.models.agent import Agent
 from app.models.role import Role
@@ -9,35 +9,16 @@ from passlib.context import CryptContext
 router = APIRouter()
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
-# 📦 Schémas Pydantic
 class AgentCreate(BaseModel):
-    username: constr(min_length=3, max_length=50)
-    password: constr(min_length=6)
-    role: str
-
-class AgentResponse(BaseModel):
-    id: int
     username: str
+    password: str
     role: str
 
-    class Config:
-        orm_mode = True
-
-# 📋 Liste des agents
-@router.get("/", response_model=list[AgentResponse])
+@router.get("/agents")
 def list_agents(db: Session = Depends(get_db)):
-    agents = db.query(Agent).all()
-    return [
-        AgentResponse(
-            id=agent.id,
-            username=agent.username,
-            role=agent.role.name if agent.role else "inconnu"
-        )
-        for agent in agents
-    ]
+    return db.query(Agent).all()
 
-# ➕ Création d’un agent
-@router.post("/", response_model=AgentResponse, status_code=status.HTTP_201_CREATED)
+@router.post("/agents")
 def create_agent(agent_data: AgentCreate, db: Session = Depends(get_db)):
     if db.query(Agent).filter_by(username=agent_data.username).first():
         raise HTTPException(status_code=400, detail="Nom d'utilisateur déjà utilisé.")
@@ -55,19 +36,13 @@ def create_agent(agent_data: AgentCreate, db: Session = Depends(get_db)):
     db.add(agent)
     db.commit()
     db.refresh(agent)
+    return agent
 
-    return AgentResponse(
-        id=agent.id,
-        username=agent.username,
-        role=role.name
-    )
-
-# ❌ Suppression d’un agent
-@router.delete("/{agent_id}", status_code=status.HTTP_200_OK)
+@router.delete("/agents/{agent_id}")
 def delete_agent(agent_id: int, db: Session = Depends(get_db)):
     agent = db.query(Agent).get(agent_id)
     if not agent:
         raise HTTPException(status_code=404, detail="Agent introuvable.")
     db.delete(agent)
     db.commit()
-    return {"message": f"Agent {agent.username} supprimé avec succès."}
+    return {"message": "Supprimé"}
