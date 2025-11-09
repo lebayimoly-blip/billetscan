@@ -2,6 +2,13 @@
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
+const cors = require('cors');
+
+// 🔗 Import des routeurs
+const authRoutes = require('./auth.routes');
+const statsRoutes = require('./stats.routes');
+const utilisateursRoutes = require('./utilisateurs.routes');
+const scanRoutes = require('./scan.routes');
 
 // 🚀 Initialisation de l'application
 const app = express();
@@ -13,16 +20,11 @@ app.use((req, res, next) => {
   next();
 });
 
-// 🔧 Middleware JSON
+// 🔧 Middlewares
+app.use(cors());
 app.use(express.json());
 
-// 🔗 Import des routes institutionnelles
-const authRoutes = require('./auth.routes');
-const statsRoutes = require('./stats.routes');
-const utilisateursRoutes = require('./utilisateurs.routes');
-const scanRoutes = require('./scan.routes');
-
-// 🔗 Montage des routes
+// 🔗 Montage des routes API
 app.use('/auth', authRoutes);
 app.use('/stats', statsRoutes);
 app.use('/utilisateurs', utilisateursRoutes);
@@ -49,5 +51,5 @@ mongoose.connect("mongodb+srv://MolyLEBAYIONGUELE:W6BWgGv5V83aS7l3@cluster0.6h82
 // 🚀 Démarrage du serveur
 const PORT = process.env.PORT || 10000;
 app.listen(PORT, () => {
-  console.log(`✅ Serveur démarré sur le port ${PORT}`);
+  console.log(`🚀 Serveur lancé sur le port ${PORT}`);
 });
