@@ -1,7 +1,6 @@
 // 📦 Import des modules
 const express = require('express');
 const path = require('path');
-const mongoose = require('mongoose');
 const cors = require('cors');
 
 // 🔗 Import des routeurs
@@ -30,23 +29,19 @@ app.use('/stats', statsRoutes);
 app.use('/utilisateurs', utilisateursRoutes);
 app.use('/scan', scanRoutes);
 
-// 🖼️ Fichiers statiques React
-app.use(express.static(path.join(__dirname, 'frontend/build')));
+// 🖼️ Fichiers statiques (React build ou frontend)
+const frontendPath = path.join(__dirname, 'frontend', 'build');
+app.use(express.static(frontendPath));
 
 // 🛠️ Service Worker (évite MIME error)
 app.get('/service-worker.js', (req, res) => {
-  res.sendFile(path.resolve(__dirname, 'frontend/build/service-worker.js'));
+  res.sendFile(path.resolve(frontendPath, 'service-worker.js'));
 });
 
 // 🌐 Fallback SPA (à placer en dernier)
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'frontend/build/index.html'));
+  res.sendFile(path.resolve(frontendPath, 'index.html'));
 });
-
-// 🔗 Connexion à MongoDB Atlas
-mongoose.connect("mongodb+srv://MolyLEBAYIONGUELE:W6BWgGv5V83aS7l3@cluster0.6h82w7w.mongodb.net/scanbillet?retryWrites=true&w=majority")
-  .then(() => console.log("✅ Connexion MongoDB réussie"))
-  .catch((err) => console.error("❌ Erreur MongoDB :", err));
 
 // 🚀 Démarrage du serveur
 const PORT = process.env.PORT || 10000;
